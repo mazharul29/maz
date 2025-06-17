@@ -244,6 +244,14 @@
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
         
+        .hexagon {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        
+        .diamond {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
         .moving {
             animation: moveTarget 4s linear infinite;
         }
@@ -258,6 +266,10 @@
         
         .pulsing {
             animation: pulseTarget 1.5s ease infinite;
+        }
+        
+        .wobbling {
+            animation: wobble 1.5s ease-in-out infinite;
         }
         
         @keyframes moveTarget {
@@ -280,6 +292,15 @@
         @keyframes pulseTarget {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.15); }
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: translateX(0%) rotate(0deg); }
+            15% { transform: translateX(-25%) rotate(-5deg); }
+            30% { transform: translateX(20%) rotate(3deg); }
+            45% { transform: translateX(-15%) rotate(-3deg); }
+            60% { transform: translateX(10%) rotate(2deg); }
+            75% { transform: translateX(-5%) rotate(-1deg); }
         }
         
         .particle {
@@ -619,17 +640,36 @@
             transform: scale(1.1);
         }
         
-        /* New target types */
-        .hexagon {
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        /* Powered by text */
+        .powered-by {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .diamond {
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        .powered-by a {
+            color: #4cc9f0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         
-        .heart {
-            clip-path: path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z");
+        .powered-by a:hover {
+            color: #f72585;
+            text-decoration: underline;
         }
         
         /* New animations */
@@ -637,118 +677,6 @@
             animation: float 4s ease-in-out infinite;
         }
         
-        .wobbling {
-            animation: wobble 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes wobble {
-            0%, 100% { transform: translateX(0%) rotate(0deg); }
-            15% { transform: translateX(-25%) rotate(-5deg); }
-            30% { transform: translateX(20%) rotate(3deg); }
-            45% { transform: translateX(-15%) rotate(-3deg); }
-            60% { transform: translateX(10%) rotate(2deg); }
-            75% { transform: translateX(-5%) rotate(-1deg); }
-        }
-        
-        /* New power-up effects */
-        .slow-motion {
-            animation: slowMotion 1s ease-in-out infinite;
-        }
-        
-        @keyframes slowMotion {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(0.8); }
-        }
-        
-        /* New game mode button */
-        #game-modes {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-        }
-        
-        .mode-btn {
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .mode-btn.active {
-            background: rgba(67, 97, 238, 0.4);
-            border-color: rgba(67, 97, 238, 0.8);
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-        }
-        
-        .mode-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Sound wave animation */
-        .sound-wave {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 20px;
-            gap: 3px;
-        }
-        
-        .sound-bar {
-            width: 4px;
-            height: 100%;
-            background: #4cc9f0;
-            border-radius: 2px;
-            animation: soundWave 1.2s ease infinite;
-        }
-        
-        .sound-bar:nth-child(2) { animation-delay: 0.1s; }
-        .sound-bar:nth-child(3) { animation-delay: 0.2s; }
-        .sound-bar:nth-child(4) { animation-delay: 0.3s; }
-        .sound-bar:nth-child(5) { animation-delay: 0.4s; }
-        
-        @keyframes soundWave {
-            0%, 100% { transform: scaleY(0.3); }
-            50% { transform: scaleY(1); }
-        }
-        
-        /* New achievement styles */
-        .achievement-list {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 50;
-        }
-        
-        .achievement-item {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px 15px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateX(-120%);
-            transition: transform 0.5s ease;
-            border-left: 4px solid #f8961e;
-        }
-        
-        .achievement-item.show {
-            transform: translateX(0);
-        }
-        
-        .achievement-icon {
-            font-size: 1.5rem;
-            color: #f8961e;
-        }
-        
-        /* New target effect */
         .target-explosion {
             position: absolute;
             width: 100px;
@@ -765,7 +693,7 @@
             100% { transform: scale(3); opacity: 0; }
         }
         
-        /* New game intro animation */
+        /* Game intro animation */
         .game-intro {
             position: fixed;
             top: 0;
@@ -836,12 +764,27 @@
             pointer-events: none;
             z-index: -1;
         }
+        
+        /* New target effect */
+        .glow {
+            animation: glowEffect 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glowEffect {
+            from { box-shadow: 0 0 5px currentColor; }
+            to { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+        }
+        
+        /* Smooth transitions */
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body>
     <div class="game-intro">
         <h1 class="intro-title">SUPER TARGET CLICK</h1>
-        <p class="intro-subtitle">Test your reflexes and accuracy in this fast-paced target clicking game! Score points, collect power-ups, and beat your high score!</p>
+        <p class="intro-subtitle">Test your reflexes and accuracy in this fast-paced target clicking game!</p>
         <button class="intro-start-btn">START GAME</button>
         <div class="intro-particles" id="intro-particles"></div>
     </div>
@@ -853,6 +796,11 @@
         <div class="sound-btn" id="fullscreen-btn">
             <i class="fas fa-expand"></i>
         </div>
+    </div>
+    
+    <div class="powered-by">
+        <i class="fas fa-code"></i>
+        Powered by <a href="https://my.itsme.run.place" target="_blank">my.itsme.run.place</a>
     </div>
     
     <div class="header">
@@ -880,12 +828,6 @@
         <div class="game-description">
             Click targets to score points. Collect <span class="highlight">power-ups</span> for bonuses. 
             Keep your combo going to multiply points! Every 10 seconds the game gets <span class="highlight">faster</span>.
-        </div>
-        
-        <div id="game-modes">
-            <div class="mode-btn active" data-mode="normal">Normal</div>
-            <div class="mode-btn" data-mode="time-attack">Time Attack</div>
-            <div class="mode-btn" data-mode="precision">Precision</div>
         </div>
         
         <div id="level-display">Level: 1</div>
@@ -945,13 +887,15 @@
         <div id="final-score">0</div>
         <div id="high-score">High Score: 0</div>
         <button id="play-again-btn"><i class="fas fa-sync-alt"></i> PLAY AGAIN</button>
+        <div class="powered-by" style="position: relative; margin-top: 30px;">
+            <i class="fas fa-code"></i>
+            Powered by <a href="https://my.itsme.run.place" target="_blank">my.itsme.run.place</a>
+        </div>
     </div>
     
     <div class="achievement-badge" id="achievement-badge">
         <i class="fas fa-trophy"></i> New Achievement Unlocked!
     </div>
-    
-    <div class="achievement-list" id="achievement-list"></div>
     
     <div class="footer">
         <div class="footer-content">
@@ -976,15 +920,7 @@
         let level = 1;
         let multiplierActive = false;
         let multiplierTimeout;
-        let gameMode = 'normal';
         let soundEnabled = true;
-        let achievements = [
-            { id: 'first-blood', name: 'First Blood', description: 'Hit your first target', unlocked: false },
-            { id: 'combo-master', name: 'Combo Master', description: 'Reach a 3x combo', unlocked: false },
-            { id: 'point-collector', name: 'Point Collector', description: 'Score 500 points', unlocked: false },
-            { id: 'speed-demon', name: 'Speed Demon', description: 'Reach level 5', unlocked: false },
-            { id: 'power-hoarder', name: 'Power Hoarder', name: 'Collect 5 power-ups in one game', unlocked: false }
-        ];
         
         // Target types with different behaviors
         let targetTypes = [
@@ -996,7 +932,8 @@
                 shape: 'normal',
                 symbol: '★',
                 lifetime: 2000,
-                sound: 'pop1'
+                sound: 'pop1',
+                glow: true
             },
             { 
                 color: '#4cc9f0', 
@@ -1006,7 +943,8 @@
                 shape: 'triangle',
                 symbol: '▲',
                 lifetime: 2500,
-                sound: 'pop2'
+                sound: 'pop2',
+                glow: false
             },
             { 
                 color: '#4ad66d', 
@@ -1016,7 +954,8 @@
                 shape: 'square',
                 symbol: '■',
                 lifetime: 2200,
-                sound: 'pop3'
+                sound: 'pop3',
+                glow: true
             },
             { 
                 color: '#f8961e', 
@@ -1026,47 +965,52 @@
                 shape: 'star',
                 symbol: '✪',
                 lifetime: 1800,
-                sound: 'pop1'
+                sound: 'pop1',
+                glow: false
             },
             { 
                 color: '#b5179e', 
                 points: 30, 
                 size: 45,
                 behavior: 'spinning',
-                shape: 'normal',
+                shape: 'diamond',
                 symbol: '◆',
                 lifetime: 3000,
-                sound: 'pop2'
+                sound: 'pop2',
+                glow: true
             },
             { 
                 color: '#7209b7', 
                 points: 25, 
                 size: 50,
                 behavior: 'pulsing',
-                shape: 'normal',
-                symbol: '❖',
+                shape: 'hexagon',
+                symbol: '⬣',
                 lifetime: 2500,
-                sound: 'pop3'
+                sound: 'pop3',
+                glow: false
             },
             { 
                 color: '#9b5de5', 
                 points: 40, 
                 size: 40,
                 behavior: 'wobbling',
-                shape: 'hexagon',
-                symbol: '⬣',
+                shape: 'normal',
+                symbol: '●',
                 lifetime: 2800,
-                sound: 'pop1'
+                sound: 'pop1',
+                glow: true
             },
             { 
                 color: '#f15bb5', 
                 points: 35, 
                 size: 65,
                 behavior: 'floating',
-                shape: 'heart',
+                shape: 'normal',
                 symbol: '❤️',
                 lifetime: 3200,
-                sound: 'pop2'
+                sound: 'pop2',
+                glow: true
             }
         ];
         
@@ -1164,8 +1108,6 @@
         const achievementBadge = document.getElementById('achievement-badge');
         const soundToggle = document.getElementById('sound-toggle');
         const fullscreenBtn = document.getElementById('fullscreen-btn');
-        const modeButtons = document.querySelectorAll('.mode-btn');
-        const achievementList = document.getElementById('achievement-list');
         const gameIntro = document.querySelector('.game-intro');
         const introStartBtn = document.querySelector('.intro-start-btn');
         const introParticles = document.getElementById('intro-particles');
@@ -1178,14 +1120,6 @@
             soundToggle.addEventListener('click', toggleSound);
             fullscreenBtn.addEventListener('click', toggleFullscreen);
             introStartBtn.addEventListener('click', startGame);
-            
-            modeButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    modeButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    gameMode = this.dataset.mode;
-                });
-            });
             
             // Set global stats
             globalHighScore.textContent = highScore;
@@ -1229,26 +1163,6 @@
             soundEnabled = !soundEnabled;
             const icon = soundToggle.querySelector('i');
             icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-            
-            // Add sound wave animation when turning sound on
-            if (soundEnabled) {
-                soundToggle.innerHTML = '';
-                const wave = document.createElement('div');
-                wave.className = 'sound-wave';
-                
-                for (let i = 0; i < 5; i++) {
-                    const bar = document.createElement('div');
-                    bar.className = 'sound-bar';
-                    wave.appendChild(bar);
-                }
-                
-                soundToggle.appendChild(wave);
-                
-                setTimeout(() => {
-                    soundToggle.innerHTML = '';
-                    soundToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-                }, 2000);
-            }
         }
         
         // Toggle fullscreen mode
@@ -1301,11 +1215,6 @@
                     levelDisplay.textContent = `Level: ${level}`;
                     showSpecialText(`LEVEL ${level}!`, gameArea, '#4cc9f0');
                     playSound('levelup');
-                    
-                    // Unlock achievement for reaching level 5
-                    if (level >= 5 && !achievements[3].unlocked) {
-                        unlockAchievement('speed-demon');
-                    }
                 }
                 
                 if (timeLeft <= 0) {
@@ -1347,6 +1256,12 @@
             
             const target = document.createElement('div');
             target.className = `target ${targetType.behavior} ${targetType.shape}`;
+            
+            // Add glow effect for some targets
+            if (targetType.glow) {
+                target.classList.add('glow');
+                target.style.color = targetType.color;
+            }
             
             // Random position within game area
             const maxX = gameArea.offsetWidth - targetType.size;
@@ -1404,15 +1319,6 @@
                 // Special effect for spinning targets
                 if (this.dataset.behavior === 'spinning') {
                     showSpecialText('PERFECT!', this, '#f72585');
-                }
-                
-                // Unlock achievements
-                if (totalTargets === 1 && !achievements[0].unlocked) {
-                    unlockAchievement('first-blood');
-                }
-                
-                if (score >= 500 && !achievements[2].unlocked) {
-                    unlockAchievement('point-collector');
                 }
                 
                 updateDisplays();
@@ -1536,9 +1442,6 @@
                         break;
                 }
                 
-                // Show achievement
-                showAchievement(this.dataset.name);
-                
                 // Create special particles
                 createParticles(this, true);
                 
@@ -1600,13 +1503,13 @@
             // Change animation speed
             const targets = document.querySelectorAll('.target');
             targets.forEach(target => {
-                target.classList.add('slow-motion');
+                target.style.animationDuration = '2s';
             });
             
             // Reset after 5 seconds
             setTimeout(() => {
                 targets.forEach(target => {
-                    target.classList.remove('slow-motion');
+                    target.style.animationDuration = '';
                 });
             }, 5000);
         }
@@ -1640,51 +1543,6 @@
             score += pointsEarned;
             showSpecialText(`+${pointsEarned}`, gameArea, '#f72585');
             updateDisplays();
-        }
-        
-        // Show achievement badge
-        function showAchievement(name) {
-            achievementBadge.innerHTML = `<i class="fas fa-trophy"></i> Achievement: ${name}!`;
-            achievementBadge.classList.add('show');
-            
-            setTimeout(() => {
-                achievementBadge.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Unlock an achievement
-        function unlockAchievement(id) {
-            const achievement = achievements.find(a => a.id === id);
-            if (achievement && !achievement.unlocked) {
-                achievement.unlocked = true;
-                
-                // Show achievement in list
-                const achievementItem = document.createElement('div');
-                achievementItem.className = 'achievement-item';
-                achievementItem.innerHTML = `
-                    <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
-                    <div>
-                        <div class="achievement-name">${achievement.name}</div>
-                        <div class="achievement-desc">${achievement.description}</div>
-                    </div>
-                `;
-                achievementList.appendChild(achievementItem);
-                
-                // Show with animation
-                setTimeout(() => {
-                    achievementItem.classList.add('show');
-                    
-                    // Remove after delay
-                    setTimeout(() => {
-                        achievementItem.classList.remove('show');
-                        setTimeout(() => {
-                            if (achievementItem.parentNode) {
-                                achievementList.removeChild(achievementItem);
-                            }
-                        }, 500);
-                    }, 3000);
-                }, 100);
-            }
         }
         
         // Create particles effect
@@ -1823,10 +1681,6 @@
             // Update combo based on count
             if (comboCount >= 10) {
                 combo = 3;
-                // Unlock combo achievement
-                if (!achievements[1].unlocked) {
-                    unlockAchievement('combo-master');
-                }
             } else if (comboCount >= 5) {
                 combo = 2;
             } else {
